@@ -1,0 +1,140 @@
+plugins {
+        id 'org.springframework.boot' version '2.2.6.RELEASE'
+        id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+        id 'java'
+        id "com.jfrog.artifactory" version "4.21.0" // added
+        id  'maven-publish' //added
+
+}
+group = 'com.vedikas'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+        compileOnly {
+                extendsFrom annotationProcessor
+        }
+}
+
+repositories {
+        mavenCentral()
+}
+
+dependencies {
+
+
+
+
+
+        //implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+        //compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb
+compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '1.1.0.RELEASE'
+
+
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+                //runtime group: 'com.twilio.sdk', name: 'twilio', version: '7.1.0'
+                compile group: 'com.twilio.sdk', name: 'twilio', version: '7.1.0'
+//Thanks for using https://jar-download.com
+
+compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
+
+        // https://mvnrepository.com/artifact/javax.validation/validation-api
+compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+
+
+        // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
+compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.2.1'
+
+// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+
+
+        compileOnly 'org.projectlombok:lombok'
+        compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.133'
+
+
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+                exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        testImplementation 'io.projectreactor:reactor-test'
+}
+
+
+test {
+        useJUnitPlatform()
+}
+
+// Changed up to
+artifactory {
+  publish {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
+    //A closure defining publishing information
+    repository {
+      repoKey =   'test_gradle' //The Artifactory repository key to publish to
+      username = "${artifactory_user}"          //The publisher user name
+      password =    "${artifactory_password}"
+      maven = true
+
+}
+        defaults {
+            publications ('mavenJava')
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+jar {                  // added
+    enabled = true     // added
+}                      // added
+
+
+// Changed here   
+
+
+
+
+
+
+
+nano ~/.gradle/gradle.properties
+
+artifactory_user=admin
+artifactory_password=Shiva@9154924024
+artifactory_contextUrl=http://54.208.239.64:8082/artifactory/test_gradle
+
+
+
+gradle artifactoryPublish    ### comamnd
+
+
+Reference Link :-
+
+https://www.jfrog.com/confluence/display/JFROG/Gradle+Artifactory+Plugin
+
+https://dzone.com/articles/publish-jar-artifact-using
+
+https://www.jfrog.com/confluence/display/JFROG/Working+with+Gradle
+
+https://jfrog.com/knowledge-base/how-to-publish-build-info-and-artifacts-from-a-gradle-android-project-into-artifactory/
+
+https://stackoverflow.com/questions/43899791/gradle-publish-to-artifactory-could-not-find-method-artifactorypublish  **
+
+https://bintray.com/jfrog/jfrog-jars/build-info-extractor-gradle
+
+https://plugins.gradle.org/plugin/com.jfrog.artifactory  ************ (plugin purpose)
+
+https://stackoverflow.com/questions/62937145/i-am-getting-a-gradle-build-issue-when-updating-gradle-from-4-10-1-to-6-4-1 ******** for jar enabling
+
+https://unix.stackexchange.com/questions/118217/chmod-silent-mode-how-force-exit-code-0-in-spite-of-error ***************************************** in jenkins stage fails measns follow this
