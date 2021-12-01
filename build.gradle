@@ -65,6 +65,7 @@ artifactory {
     contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
     //A closure defining publishing information
     repository {
+    ivy {
       repoKey =   'functionhalls' //The Artifactory repository key to publish to
       username = "${artifactory_user}"          //The publisher user name
       password =    "${artifactory_password}"
@@ -75,6 +76,8 @@ artifactory {
             publications ('mavenJava')
         }
     }
+}
+
 }
 
 publishing {
