@@ -1,1 +1,4 @@
 rootProject.name = 'functionhall-service'
+artifactory_user=admin
+artifactory_password=Shiva@9154924024
+artifactory_contextUrl=http://3.132.151.52:8082/artifactory/functionhalls/
