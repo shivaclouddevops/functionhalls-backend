@@ -64,7 +64,7 @@ test {
 
 artifactory {
   publish {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
+   // contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
     //A closure defining publishing information
     repository {
       repoKey =   'functionhalls' //The Artifactory repository key to publish to
