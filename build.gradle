@@ -3,7 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 	id "com.jfrog.artifactory" version "4.21.0" // added
-        id  'maven-publish' //added
+    id  'maven-publish' //added
 }
 
 group = 'com.vedikas'
@@ -45,6 +45,9 @@ compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.21'
 compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.2.1'
 	  
 
+//
+compile "org.jfrog.buildinfo:build-info-extractor-gradle:2.2.4"
+
 
 	compileOnly 'org.projectlombok:lombok'
 	compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.11.133'
@@ -60,23 +63,24 @@ compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.2.1'
 test {
 	useJUnitPlatform()
 }
-
-
 artifactory {
   publish {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
-    // A closure defining publishing information
+    contextUrl = "http://3.132.151.52:8082/artifactory/functionhalls/"   //The base Artifactory URL for the publisher
+    //A closure defining publishing information
     repository {
+    ivy {
       repoKey =   'functionhalls' //The Artifactory repository key to publish to
-      username = "${artifactory_user}"          //The publisher user name
-      password =    "${artifactory_password}"
-      maven = true
+      username = "admin"          //The publisher user name
+      password =    "Shiva@9154924024"
+      mavenCompatible = true
 
 }
         defaults {
             publications ('mavenJava')
         }
     }
+}
+
 }
 
 publishing {
