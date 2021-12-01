@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id "com.jfrog.artifactory" version "4.21.0" // added
+	id "com.jfrog.artifactory" // version "4.21.0" // added
         id  'maven-publish' //added
 }
 
@@ -64,8 +64,8 @@ test {
 
 artifactory {
   publish {
-   // contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
-    //A closure defining publishing information
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
+    // A closure defining publishing information
     repository {
       repoKey =   'functionhalls' //The Artifactory repository key to publish to
       username = "${artifactory_user}"          //The publisher user name
