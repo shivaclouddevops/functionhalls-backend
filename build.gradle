@@ -60,3 +60,33 @@ compile group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.2.1'
 test {
 	useJUnitPlatform()
 }
+
+
+artifactory {
+  publish {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL for the publisher
+    //A closure defining publishing information
+    repository {
+      repoKey =   'functionhalls' //The Artifactory repository key to publish to
+      username = "${artifactory_user}"          //The publisher user name
+      password =    "${artifactory_password}"
+      maven = true
+
+}
+        defaults {
+            publications ('mavenJava')
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+jar {                  // added
+    enabled = true     // added
+}                      // added
