@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
-	id "com.jfrog.artifactory" // version "4.21.0" // added
+	id "com.jfrog.artifactory" version "4.21.0" // added
         id  'maven-publish' //added
 }
 
