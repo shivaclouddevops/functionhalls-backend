@@ -64,13 +64,13 @@ test {
 }
 artifactory {
   publish {
-    contextUrl = "http://3.132.151.52:8082/artifactory/functionhalls/"   //The base Artifactory URL for the publisher
+    contextUrl = "http://107.22.155.135:8082/artifactory/venuehalls/"   //The base Artifactory URL for the publisher
     //A closure defining publishing information
     repository {
     ivy {
-      repoKey =   'functionhalls' //The Artifactory repository key to publish to
+      repoKey =   'venuehalls/' //The Artifactory repository key to publish to
       username = "admin"          //The publisher user name
-      password =    "admin"
+      password =    "Shiva@9154924024"
       mavenCompatible = true
 
 }
